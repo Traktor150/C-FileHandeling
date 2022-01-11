@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Filhandeling
 {
@@ -6,7 +7,27 @@ namespace Filhandeling
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string namn;
+            string path = "fileWithNames.txt";
+
+            Console.WriteLine("Ange ett namn.");
+            namn = Console.ReadLine();
+
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                sw.WriteLine(namn);
+            }
+
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+
+            Console.ReadLine();
         }
     }
 }
